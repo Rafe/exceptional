@@ -20,14 +20,6 @@ var Exceptional = require('exceptional-node');
 Exceptional.API_KEY = **YOUR-API-KEY**;
 ```
 
-Alternately, include the exceptional.js file in your application, and set your Exceptional API-KEY
-
-```javascript
-var Exceptional = require('./exceptional');
-
-Exceptional.API_KEY = **YOUR-API-KEY**;
-```
-
 ## Usage
 
 There a are multiple ways you can use exceptional with your node.js app.
@@ -55,6 +47,10 @@ try {
 
 Check out the small example in examples/demo.js (replace 'your-api-key-here' with your read API-KEY).
 
+```bash
+node example/demo.js
+```
+
 ## Express
 
 You can also use the express middleware errorHandler
@@ -75,8 +71,4 @@ app.get('/', function(req, res) {
 app.use(Exceptional.errorHandler);
 ```
 
-```bash
-node example/demo.js
-```
-
-Copyright &copy; 2008, 2010, 2012 getexceptional.com
+Copyright &copy; 2008-2013 getexceptional.com
