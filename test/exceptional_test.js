@@ -91,34 +91,43 @@ describe("Exceptional", function() {
         expect(json.application_environment.env).to.not.be(undefined);
       }
     });
+  });
 
-    describe("#send_error", function() {
-      it("should send error to exceptional api", function(done) {
-        Exceptional.API_KEY = 'test-api-key'
-        Exceptional.Host = 'localhost'
-        Exceptional.Port = 9876
+  describe("#send_error", function() {
+    before(function() {
+      Exceptional.API_KEY = 'test-api-key'
+      Exceptional.Host = 'localhost'
+      Exceptional.Port = 9876
+    })
 
-        var express = require('express'),
-            app = express();
+    it("should send error to exceptional api", function(done) {
 
-        app.use(express.bodyParser());
+      var express = require('express'),
+          app = express(),
+          zlib = require('zlib');
 
-        app.post('/api/errors', function(req, res) {
-          expect(req.query.api_key).to.eql('test-api-key');
-          expect(req.query.protocol_version).to.eql('6');
-          // expect(req.body.exception.message).to.eql("Big Problem");
-          res.send('ok');
-          done()
+      app.post('/api/errors', function(req, res) {
+        expect(req.query.api_key).to.eql('test-api-key');
+        expect(req.query.protocol_version).to.eql('6');
+
+        req.on('data', function(data) {
+          zlib.unzip(data, function(err, buffer) {
+            expect(JSON.parse(buffer.toString()).exception.message)
+              .to.eql('Big Problem');
+          });
         });
 
-        app.listen(9876);
-
-        try {
-          throw new Error("Big Problem");
-        } catch(error) {
-          Exceptional.handle(error)
-        }
+        res.send('ok');
+        done()
       });
+
+      app.listen(9876);
+
+      try {
+        throw new Error("Big Problem");
+      } catch(error) {
+        Exceptional.handle(error)
+      }
     });
 
   });
