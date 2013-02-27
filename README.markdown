@@ -15,7 +15,7 @@ npm install exceptional-node
 ```
 
 ```javascript
-var Exceptional = require('exceptional-node').Exceptional;
+var Exceptional = require('exceptional-node');
 
 Exceptional.API_KEY = **YOUR-API-KEY**;
 ```
@@ -23,7 +23,7 @@ Exceptional.API_KEY = **YOUR-API-KEY**;
 Alternately, include the exceptional.js file in your application, and set your Exceptional API-KEY
 
 ```javascript
-var Exceptional = require('./exceptional').Exceptional;
+var Exceptional = require('./exceptional');
 
 Exceptional.API_KEY = **YOUR-API-KEY**;
 ```
@@ -54,6 +54,26 @@ try {
 ## Example
 
 Check out the small example in examples/demo.js (replace 'your-api-key-here' with your read API-KEY).
+
+## Express
+
+You can also use the express middleware errorHandler
+
+```javascript
+
+var express = require('express'),
+    app = express(),
+    Exceptional = require('exceptional-node');
+
+Exceptional.API_KEY = 'your-api-key-here';
+
+app.get('/', function(req, res) {
+  res.send('ok');
+});
+
+//need to put after the routes
+app.use(Exceptional.errorHandler);
+```
 
 ```bash
 node example/demo.js
