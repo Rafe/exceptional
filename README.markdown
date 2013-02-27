@@ -2,9 +2,9 @@
 
 Exceptional helps you track errors in your node.js apps!
 
-This module posts exception data from your node.js apps to Exceptional <http://getexceptional.com>. When an exception occurs, data about the environment and backtrace of the exception are sent.
+This module posts exception data from your node.js apps to Exceptional <http://exceptional.io>. When an exception occurs, data about the environment and backtrace of the exception are sent.
 
-To use Exceptional for node.js you must have an account at <http://getexceptional.com>.
+To use Exceptional for node.js you must have an account at <http://exceptional.io>.
 
 ## Installation
 
@@ -59,7 +59,7 @@ You can also use the express middleware errorHandler
 
 var express = require('express'),
     app = express(),
-    Exceptional = require('exceptional-node');
+    Exceptional = require('exceptional');
 
 Exceptional.API_KEY = 'your-api-key-here';
 
