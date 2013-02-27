@@ -1,4 +1,4 @@
-var Exceptional = require('../lib/exceptional').Exceptional;
+var Exceptional = require('../lib/exceptional');
 
 Exceptional.API_KEY = 'your-api-key-here';
 

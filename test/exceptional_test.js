@@ -3,7 +3,7 @@ var expect = require('expect.js');
 describe("Exceptional", function() {
   var Exceptional = null;
   beforeEach(function() {
-    Exceptional = require('../lib/exceptional').Exceptional;
+    Exceptional = require('../lib/exceptional');
   });
 
   describe("settings", function() {
@@ -45,7 +45,7 @@ describe("Exceptional", function() {
     });
   });
 
-  describe("#error_json", function() {
+  describe("#errorJson", function() {
     beforeEach(function() {
       Exceptional.API_KEY = 'test-api-key'
     });
@@ -54,7 +54,7 @@ describe("Exceptional", function() {
       try {
         throw new Error("Big Problem");
       } catch(error) {
-        var doc = Exceptional.error_json(error);
+        var doc = Exceptional.errorJson(error);
         var json = JSON.parse(doc);
         var exception = json.exception
 
@@ -69,7 +69,7 @@ describe("Exceptional", function() {
       try {
         throw new Error("Big Problem");
       } catch(error) {
-        var doc = Exceptional.error_json(error);
+        var doc = Exceptional.errorJson(error);
         var json = JSON.parse(doc);
 
         expect(json.client.name).to.eql("Exceptional for node.js");
@@ -82,7 +82,7 @@ describe("Exceptional", function() {
       try {
         throw new Error("Big Problem");
       } catch(error) {
-        var doc = Exceptional.error_json(error);
+        var doc = Exceptional.errorJson(error);
         var json = JSON.parse(doc);
 
         expect("node-javascript", json.application_environment.language);
@@ -93,7 +93,7 @@ describe("Exceptional", function() {
     });
   });
 
-  describe("#send_error", function() {
+  describe("#sendError", function() {
     before(function() {
       Exceptional.API_KEY = 'test-api-key'
       Exceptional.Host = 'localhost'
@@ -115,10 +115,9 @@ describe("Exceptional", function() {
             expect(JSON.parse(buffer.toString()).exception.message)
               .to.eql('Big Problem');
           });
+          res.send('ok')
+          done()
         });
-
-        res.send('ok');
-        done()
       });
 
       app.listen(9876);
@@ -132,6 +131,15 @@ describe("Exceptional", function() {
 
   });
 
+  describe("#errorHandler", function() {
+    it("can handle errors in express middleware form", function(done) {
+      Exceptional.handle = function(err) {
+        expect(err.message).to.eql('Big Problem');
+      }
+
+      Exceptional.errorHandler(new Error('Big Problem'), 'req', 'res', done);
+    });
+  });
 });
 
 
