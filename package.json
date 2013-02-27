@@ -1,7 +1,7 @@
-{ "name"         : "exceptional-node",
+{ "name"         : "exceptional",
   "version"      : "0.2.0",
-  "description"  : "node.js module for getexceptional.com",
-  "homepage"     : "http://getexceptional.com",
+  "description"  : "node.js module for exceptional.io",
+  "homepage"     : "http://exceptional.io",
   "author"       : "Wal McConnell <support@getexceptional.com>",
   "contributors" : [
     "Wal McConnell <wal@contrast.ie>",
@@ -9,7 +9,7 @@
   ],
   "repository" : {
     "type" : "git",
-    "url"  : "http://github.com/contrast/exceptional-node.git"
+    "url"  : "http://github.com/Rafe/exceptional.git"
   },
   "bugs" : {
     "web"  : "http://github.com/contrast/exceptional-node/issues",

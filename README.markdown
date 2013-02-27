@@ -11,11 +11,11 @@ To use Exceptional for node.js you must have an account at <http://getexceptiona
 Install from [NPM](http://npmjs.com):
 
 ```bash
-npm install exceptional-node
+npm install --save git://github.com/Rafe/exceptional.git
 ```
 
 ```javascript
-var Exceptional = require('exceptional-node');
+var Exceptional = require('exceptional');
 
 Exceptional.API_KEY = **YOUR-API-KEY**;
 ```
