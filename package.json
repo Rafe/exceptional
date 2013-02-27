@@ -17,8 +17,13 @@
   },
   "main"         : "./lib/exceptional",
   "engines"      : { "node" : ">=0.6.0" },
-  "scripts"      : { "test" : "test/exceptional-test.js" },
+  "scripts"      : { "test" : "mocha" },
   "dependencies" : {},
+  "devDependencies": {
+    "mocha": "*",
+    "expect.js": "*",
+    "express": "*"
+  },
   "licenses" : [
     { "type" : "MIT",
       "url"  : "http://github.com/contrast/exceptional-node"
